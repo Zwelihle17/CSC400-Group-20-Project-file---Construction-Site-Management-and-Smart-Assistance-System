@@ -1,0 +1,280 @@
+/* ================================================================
+   css/dashboard.css  —  ConstructPro v3
+   ================================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --amber:     #f59e0b;
+  --amber2:    #fcd34d;
+  --amber-bg:  rgba(245,158,11,0.10);
+  --dark:      #0c0c0c;
+  --sidebar:   #101010;
+  --main:      #161616;
+  --card:      #1e1e1e;
+  --card2:     #252525;
+  --border:    rgba(255,255,255,0.07);
+  --border-a:  rgba(245,158,11,0.22);
+  --text:      #f0ece3;
+  --text2:     rgba(240,236,227,0.50);
+  --muted:     #4a4540;
+  --green:     #22c55e;
+  --red:       #ef4444;
+  --blue:      #3b82f6;
+  --orange:    #f97316;
+  --purple:    #a855f7;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+
+body{font-family:'Inter',sans-serif;background:var(--main);color:var(--text);min-height:100vh;display:flex;font-size:14px}
+
+/* ── SVG ICON UTILITY ── */
+/* All inline SVGs inherit color and are vertically aligned */
+svg{vertical-align:middle;flex-shrink:0}
+.nav-icon svg{display:block}
+
+/* ================================================================
+   SIDEBAR
+   ================================================================ */
+.sidebar{width:252px;min-height:100vh;background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;inset-block:0;left:0;z-index:100;overflow-y:auto}
+
+.sb-logo{padding:26px 22px 20px;border-bottom:1px solid var(--border)}
+.sb-logo-main{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--amber)}
+.sb-logo-sub{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:2px}
+
+.sb-user{padding:14px 22px;border-bottom:1px solid var(--border);background:rgba(245,158,11,0.04)}
+.sb-user-name{font-weight:600;font-size:14px}
+.sb-user-role{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-top:3px}
+.sb-user-site{font-size:11px;color:var(--text2);margin-top:2px}
+
+.sb-nav{padding:14px 0;flex:1}
+.sb-section{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);padding:10px 22px 5px}
+
+/* Nav link — icon on left, label text */
+.nav-link{display:flex;align-items:center;gap:11px;padding:10px 22px;color:var(--text2);text-decoration:none;font-size:13px;font-weight:500;cursor:pointer;border-left:3px solid transparent;transition:all .15s;user-select:none}
+.nav-link:hover{color:var(--text);background:rgba(255,255,255,0.03);border-left-color:var(--border-a)}
+.nav-link.active{color:var(--text);background:var(--amber-bg);border-left-color:var(--amber)}
+.nav-link.active svg{stroke:var(--amber)}
+.nav-link svg{opacity:.65;transition:opacity .15s}
+.nav-link:hover svg,.nav-link.active svg{opacity:1}
+.nav-icon{display:flex;align-items:center;width:18px;flex-shrink:0}
+
+.sb-bottom{padding:16px 22px;border-top:1px solid var(--border)}
+.btn-logout{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.22);color:#f87171;border-radius:3px;font-size:12px;font-weight:600;letter-spacing:1px;cursor:pointer;text-decoration:none;transition:background .2s}
+.btn-logout:hover{background:rgba(239,68,68,0.16)}
+
+/* ================================================================
+   MAIN
+   ================================================================ */
+.main{margin-left:252px;flex:1;min-width:0;display:flex;flex-direction:column}
+
+.topbar{height:60px;background:var(--sidebar);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:80}
+.topbar-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px}
+.topbar-right{display:flex;align-items:center;gap:16px}
+.topbar-date{font-size:11px;color:var(--text2)}
+
+.notif-bell{position:relative;background:none;border:1px solid var(--border);border-radius:6px;color:var(--text);width:38px;height:38px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.notif-bell:hover{background:rgba(255,255,255,0.05);border-color:var(--border-a)}
+.notif-bell svg{opacity:.8}
+.notif-count{position:absolute;top:-5px;right:-5px;background:var(--red);color:#fff;font-size:9px;font-weight:700;min-width:16px;height:16px;border-radius:8px;display:flex;align-items:center;justify-content:center;padding:0 4px;font-family:'Inter',sans-serif}
+
+/* ── PAGE SECTIONS ── */
+.page-section{display:none}
+.page-section.active{display:block}
+.section-pad{padding:28px 30px 48px}
+
+.section-header{margin-bottom:22px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;line-height:1}
+.section-sub{font-size:12px;color:var(--text2);margin-top:4px}
+
+.img-banner{width:100%;height:190px;object-fit:cover;border-radius:4px;margin-bottom:22px;filter:brightness(.6) saturate(.75);border:1px solid var(--border);display:block}
+
+/* ── STATS ── */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:13px;margin-bottom:24px}
+.stat{background:var(--card);border:1px solid var(--border);border-top:2px solid var(--amber);border-radius:4px;padding:18px 20px;position:relative;overflow:hidden}
+.stat-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.stat-value{font-family:'Bebas Neue',sans-serif;font-size:40px;line-height:1.05;letter-spacing:1px;margin-top:3px}
+.stat-icon{position:absolute;right:14px;bottom:10px;opacity:.07}
+.stat-icon svg{width:36px;height:36px}
+
+/* ── GRID + CARDS ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:20px}
+.card:last-child{margin-bottom:0}
+.card-head{padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card-title{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:2px;color:var(--amber);display:flex;align-items:center;gap:8px}
+.card-title svg{stroke:var(--amber)}
+.card-body{padding:18px 20px}
+.card-body-flush{padding:0}
+
+/* ── FORMS ── */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{margin-bottom:14px}
+.form-group:last-child{margin-bottom:0}
+.f-label{display:block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.f-input,.f-select,.f-textarea{width:100%;padding:10px 13px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:3px;color:var(--text);font-family:'Inter',sans-serif;font-size:13px;outline:none;transition:border-color .2s}
+.f-input:focus,.f-select:focus,.f-textarea:focus{border-color:var(--amber);background:rgba(245,158,11,0.04)}
+.f-textarea{resize:vertical;min-height:86px}
+.f-select option{background:#222}
+
+/* ── BUTTONS ── */
+.btn{padding:9px 20px;border-radius:3px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.5px;cursor:pointer;border:none;transition:all .2s;display:inline-flex;align-items:center;gap:7px}
+.btn svg{flex-shrink:0}
+.btn-amber{background:var(--amber);color:#0c0c0c}
+.btn-amber:hover{background:var(--amber2)}
+.btn-outline{background:transparent;color:var(--amber);border:1px solid var(--amber)}
+.btn-outline:hover{background:var(--amber-bg)}
+.btn-green{background:rgba(34,197,94,0.12);color:var(--green);border:1px solid rgba(34,197,94,0.3)}
+.btn-green:hover{background:rgba(34,197,94,0.22)}
+.btn-red{background:rgba(239,68,68,0.12);color:var(--red);border:1px solid rgba(239,68,68,0.3)}
+.btn-red:hover{background:rgba(239,68,68,0.22)}
+.btn-sm{padding:5px 13px;font-size:11px}
+
+/* ── TABLE ── */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;padding:9px 16px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}
+.tbl td{padding:11px 16px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text2);vertical-align:middle}
+.tbl tr:hover td{background:rgba(255,255,255,0.02)}
+.tbl td:first-child,.tbl th:first-child{padding-left:20px}
+.tbl .empty{text-align:center;color:var(--muted);padding:30px;font-size:13px}
+
+/* ── BADGES ── */
+.badge{display:inline-block;padding:2px 9px;border-radius:3px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap}
+.b-green {background:rgba(34,197,94,.12); color:var(--green)}
+.b-red   {background:rgba(239,68,68,.12); color:var(--red)}
+.b-amber {background:rgba(245,158,11,.12);color:var(--amber)}
+.b-blue  {background:rgba(59,130,246,.12);color:var(--blue)}
+.b-orange{background:rgba(249,115,22,.12);color:var(--orange)}
+.b-purple{background:rgba(168,85,247,.12);color:var(--purple)}
+.b-gray  {background:rgba(120,120,120,.12);color:#aaa}
+
+.alert{padding:11px 15px;border-radius:3px;font-size:13px;margin-bottom:14px}
+.alert-ok {background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);color:var(--green)}
+.alert-err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:var(--red)}
+
+/* ================================================================
+   NOTIFICATION DRAWER
+   ================================================================ */
+.notif-drawer{position:fixed;top:60px;right:0;bottom:0;width:370px;background:#131313;border-left:1px solid var(--border);z-index:500;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .26s cubic-bezier(.4,0,.2,1)}
+.notif-drawer.open{transform:translateX(0)}
+.nd-head{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.nd-title{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;color:var(--amber);display:flex;align-items:center;gap:8px}
+.nd-title svg{stroke:var(--amber)}
+.nd-close{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1}
+.nd-close:hover{color:var(--text)}
+.nd-list{overflow-y:auto;flex:1}
+.nd-empty{padding:40px 20px;text-align:center;color:var(--muted);font-size:13px}
+.nd-item{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,0.04);cursor:pointer;transition:background .15s;position:relative}
+.nd-item:hover{background:rgba(255,255,255,0.03)}
+.nd-item.unread{border-left:3px solid var(--amber);background:rgba(245,158,11,0.04)}
+.nd-item.unread:hover{background:rgba(245,158,11,0.08)}
+.nd-subject{font-weight:600;font-size:13px;color:var(--text);margin-bottom:3px}
+.nd-from{font-size:11px;color:var(--text2)}
+.nd-preview{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5}
+.nd-time{font-size:10px;color:var(--muted);margin-top:5px}
+.nd-dot{position:absolute;right:18px;top:50%;transform:translateY(-50%);width:7px;height:7px;border-radius:50%;background:var(--amber)}
+
+/* ================================================================
+   MESSAGE VIEWER MODAL
+   ================================================================ */
+.msg-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:900;display:none;align-items:center;justify-content:center;padding:20px}
+.msg-overlay.open{display:flex}
+.msg-modal{background:#1a1a1a;border:1px solid var(--border);border-radius:6px;width:560px;max-width:100%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden}
+.msg-modal-head{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.msg-modal-subject{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;line-height:1.2}
+.msg-modal-meta{font-size:12px;color:var(--text2);margin-top:4px}
+.msg-close{background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;flex-shrink:0;margin-top:-2px}
+.msg-close:hover{color:var(--text)}
+.msg-modal-body{padding:22px;overflow-y:auto;font-size:14px;line-height:1.8;color:var(--text2);flex:1;white-space:pre-wrap}
+
+/* ================================================================
+   COMPOSE MODAL
+   ================================================================ */
+.compose-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:800;display:none;align-items:center;justify-content:center;padding:20px}
+.compose-overlay.open{display:flex}
+.compose-modal{background:#1a1a1a;border:1px solid var(--border);border-radius:6px;width:510px;max-width:100%}
+.compose-head{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.compose-title{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;color:var(--amber);display:flex;align-items:center;gap:8px}
+.compose-title svg{stroke:var(--amber)}
+.compose-close{background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer}
+.compose-close:hover{color:var(--text)}
+.compose-body{padding:20px}
+.compose-foot{padding:13px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}
+
+/* Admin badge in topbar */
+.admin-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;background:rgba(168,85,247,.15);border:1px solid rgba(168,85,247,.3);border-radius:3px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple)}
+
+/* Shift + complaint cards */
+.shift-card{background:var(--card2);border:1px solid var(--border);border-radius:4px;padding:14px 16px;margin-bottom:9px}
+.shift-date{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;margin-bottom:5px}
+.shift-row{display:flex;gap:18px;font-size:12px;color:var(--text2);flex-wrap:wrap}
+.shift-val{color:var(--amber);font-weight:600}
+
+/* ── USER AVATAR (user-circle icon in sidebar) ── */
+.sb-avatar{
+  width:42px;height:42px;border-radius:50%;
+  background:var(--amber-bg);
+  border:1px solid var(--border-a);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.sb-avatar svg{stroke:var(--amber)}
+.sb-user-row{display:flex;align-items:center;gap:12px}
+.sb-user-info{min-width:0}
+
+/* ── SITE PIN BADGE (user-pin icon) ── */
+.site-pin-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;color:var(--text2);margin-top:4px;
+}
+.site-pin-badge svg{stroke:var(--amber);flex-shrink:0}
+
+/* ── FILE ATTACHMENT in compose modal ── */
+.attach-bar{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;
+  background:rgba(255,255,255,0.03);
+  border:1px dashed rgba(255,255,255,0.12);
+  border-radius:3px;
+  margin-bottom:14px;
+  cursor:pointer;
+  transition:border-color .2s,background .2s;
+}
+.attach-bar:hover{
+  border-color:var(--amber);
+  background:var(--amber-bg);
+}
+.attach-bar svg{stroke:var(--amber);flex-shrink:0}
+.attach-bar-text{font-size:12px;color:var(--text2)}
+.attach-bar-text span{color:var(--amber);font-weight:600}
+#fileInput{display:none}
+
+/* Attached file chip shown after selection */
+.file-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:5px 12px;
+  background:rgba(245,158,11,0.10);
+  border:1px solid var(--border-a);
+  border-radius:20px;
+  font-size:11px;color:var(--text);
+  margin-top:6px;
+}
+.file-chip-remove{
+  background:none;border:none;color:var(--muted);
+  cursor:pointer;font-size:14px;line-height:1;padding:0;
+}
+.file-chip-remove:hover{color:var(--red)}
+
+/* Download button in notification / message viewer */
+.msg-download-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 16px;margin-top:14px;
+  background:rgba(245,158,11,0.10);
+  border:1px solid var(--border-a);
+  border-radius:3px;
+  font-size:12px;font-weight:600;color:var(--amber);
+  cursor:pointer;text-decoration:none;
+  transition:background .2s;
+}
+.msg-download-btn:hover{background:rgba(245,158,11,0.20)}
+.msg-download-btn svg{stroke:var(--amber)}
